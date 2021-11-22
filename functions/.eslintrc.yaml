@@ -11,7 +11,7 @@ extends:
   - google
   - plugin:@typescript-eslint/recommended
 
-parser: "@typescript-eslint/parser"
+parser: '@typescript-eslint/parser'
 parserOptions:
   project:
     - tsconfig.json
@@ -22,7 +22,7 @@ ignorePatterns:
   - /lib/**/* # Ignore built files
 
 plugins:
-  - "@typescript-eslint"
+  - '@typescript-eslint'
   - import
 
 rules:
@@ -41,7 +41,7 @@ rules:
   # インデントは2で守ってね
   indent:
     - error
-    - tab
+    - 2
 
   # `console.log`は消しておいて
   no-console: error
