@@ -8,7 +8,10 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "compileOnSave": true,
   "include": ["src/**/*.ts"]
