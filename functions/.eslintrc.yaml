@@ -57,3 +57,6 @@ rules:
 
   # タブとスペースを混ぜないで
   no-mixed-spaces-and-tabs: error
+
+  # うるせえ黙れシベリア送りにするぞ
+  import/no-unresolved: off
