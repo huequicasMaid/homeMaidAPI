@@ -1,15 +1,13 @@
 {
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "serve": "npm run build:dev && firebase emulators:start",
-    "shell": "npm run build:dev && firebase functions:shell",
+    "serve": "npm run build && firebase emulators:start",
+    "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "check": "tsc --noEmit",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch"
+    "build": "esbuild --bundle --outdir=lib --minify --sourcemap --format=cjs --platform=node src/index.ts "
   },
   "engines": {
     "node": "16"
