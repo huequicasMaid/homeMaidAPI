@@ -1,5 +1,5 @@
 import express from 'express';
-import devices from 'service/devices';
+import devices from '@/service/devices';
 const app: express.Express = express();
 
 app.use(express.json);
