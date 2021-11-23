@@ -2,12 +2,13 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "build": "tsc",
+    "build": "esbuild --bundle --outdir=lib --minify --sourcemap --format=cjs --platform=node src/index.ts",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "check": "tsc --noEmit"
   },
   "engines": {
     "node": "16"
