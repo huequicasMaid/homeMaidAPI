@@ -60,3 +60,5 @@ rules:
 
   # うるせえ黙れシベリア送りにするぞ
   import/no-unresolved: off
+
+  new-cap: off
