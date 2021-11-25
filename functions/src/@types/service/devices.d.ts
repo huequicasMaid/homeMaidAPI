@@ -36,7 +36,7 @@ declare module 'homeMaidApi' {
     hubDeviceId: string;
   }
 
-  export interface response {
+  export interface devicesResponse {
     statusCode: number;
     body?: {
       deviceList: device[];
