@@ -18,13 +18,14 @@ app.get('/devices', async (req: express.Request, res: express.Response) => {
 
 app.get('/scenes', async (req: express.Request, res: express.Response) => {
   const sceneResponse = await scenes();
-  if (!sceneResponse || !sceneResponse.statusCode || sceneResponse.body) {
-    res.send({ statusCode: 500, message: 'API  REQUEST ERROR' });
+
+  if (!sceneResponse) {
+    res.send({ statusCode: 500, message: 'API REQUEST ERROR' });
     return;
   }
 
   res.send({
-    statusCode: sceneResponse.statusCode || 500,
+    statusCode: sceneResponse.statusCode,
     body: sceneResponse.body,
   });
 });
