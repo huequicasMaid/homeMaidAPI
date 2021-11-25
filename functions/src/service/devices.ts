@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {response} from 'homeMaidApi';
-import {SwitchBotAPI} from '@/config';
+import { response } from 'homeMaidApi';
+import { SwitchBotAPI } from '@/config';
 
 const devices = async (): Promise<response | void> => {
   const token = SwitchBotAPI.API_TOKEN();
