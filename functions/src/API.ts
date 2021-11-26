@@ -38,37 +38,34 @@ app.get('/hello', (req: express.Request, res: express.Response) => {
   res.send({ statusCode: 200, message: 'hello' });
 });
 
-app.post(
-  '/exec',
-  async (req: express.Request<execRequest>, res: express.Response) => {
-    // API TOKEN(WIP)
-    // if (!req.params.token) {
-    //   res.send({
-    //     statusCode: 401,
-    //     message: 'unAuthorized: Missing Token',
-    //   });
-    //   return;
-    // }
+app.post('/exec', async (req: execRequest, res: express.Response) => {
+  // API TOKEN(WIP)
+  // if (!req.params.token) {
+  //   res.send({
+  //     statusCode: 401,
+  //     message: 'unAuthorized: Missing Token',
+  //   });
+  //   return;
+  // }
+  console.log('params.isTurnOn: ', req.body.isTurnOn);
+  const sceneApiRequest = await exec(
+    Boolean(req.body.isTurnOn),
+    Boolean(req.body.withRoom)
+  );
 
-    const sceneApiRequest = await exec(
-      Boolean(req.params.isTurnOn),
-      Boolean(req.params.withRoom)
-    );
-
-    if (!sceneApiRequest) {
-      res.send({
-        statusCode: 500,
-        message: 'API REQUEST ERROR',
-      });
-      return;
-    }
-
+  if (!sceneApiRequest) {
     res.send({
-      statusCode: 200,
-      message: sceneApiRequest.message,
-      body: sceneApiRequest.body,
+      statusCode: 500,
+      message: 'API REQUEST ERROR',
     });
+    return;
   }
-);
+
+  res.send({
+    statusCode: 200,
+    message: sceneApiRequest.message,
+    body: sceneApiRequest.body,
+  });
+});
 
 export default app;
