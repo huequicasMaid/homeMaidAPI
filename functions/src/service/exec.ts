@@ -15,6 +15,7 @@ const exec = async (
 
   const res = await axios.post<execResponse>(
     `${SwitchBotAPI.BASE_URL}/scenes/${sceneId}/execute`,
+    {},
     {
       headers: {
         Authorization: token,
