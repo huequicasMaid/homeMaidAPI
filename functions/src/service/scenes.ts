@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { sceneResponse } from 'homeMaidApi';
+import { sceneResponse } from 'homeMaidServices';
 import { SwitchBotAPI } from '@/config';
 
 const scenes = async (): Promise<sceneResponse | void> => {

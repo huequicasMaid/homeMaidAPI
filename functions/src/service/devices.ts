@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { devicesResponse } from 'homeMaidApi';
+import { devicesResponse } from 'homeMaidServices';
 import { SwitchBotAPI } from '@/config';
 
 const devices = async (): Promise<devicesResponse | void> => {
