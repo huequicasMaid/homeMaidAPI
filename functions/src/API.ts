@@ -47,7 +47,6 @@ app.post('/exec', async (req: execRequest, res: express.Response) => {
   //   });
   //   return;
   // }
-  console.log('params.isTurnOn: ', req.body.isTurnOn);
   const sceneApiRequest = await exec(
     Boolean(req.body.isTurnOn),
     Boolean(req.body.withRoom)
