@@ -5,6 +5,7 @@ import scenes from '@/service/scenes';
 import exec from '@/service/exec';
 
 const app: express.Express = express();
+app.use(express.json({}));
 
 app.get('/devices', async (req: express.Request, res: express.Response) => {
   const devicesResponse = await devices();
