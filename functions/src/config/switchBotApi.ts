@@ -14,29 +14,29 @@ export const Scenes = {
     const configData = config();
     if (
       !configData ||
-      !configData.come_back_with_room ||
-      !configData.come_back_without_room
+      !configData.scenes.come_back_with_room ||
+      !configData.scenes.come_back_without_room
     ) {
       return;
     }
 
     return withRoom
-      ? configData.come_back_with_room
-      : configData.come_back_without_room;
+      ? configData.scenes.come_back_with_room
+      : configData.scenes.come_back_without_room;
   },
 
   goingOut: (withRoom: boolean): string | void => {
     const configData = config();
     if (
       !configData ||
-      !configData.going_out_with_room ||
-      !configData.going_out_without_room
+      !configData.scenes.going_out_with_room ||
+      !configData.scenes.going_out_without_room
     ) {
       return;
     }
 
     return withRoom
-      ? configData.going_out_with_room
-      : configData.going_out_without_room;
+      ? configData.scenes.going_out_with_room
+      : configData.scenes.going_out_without_room;
   },
 };
