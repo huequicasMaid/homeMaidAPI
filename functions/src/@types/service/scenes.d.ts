@@ -1,4 +1,4 @@
-declare module 'homeMaidApi' {
+declare module 'homeMaidServices' {
   export interface scene {
     sceneId: string;
     sceneName: string;
