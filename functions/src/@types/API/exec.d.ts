@@ -1,5 +1,6 @@
-import express from 'express';
 declare module 'homeMaidApi' {
+  import express from 'express';
+
   export interface execRequest extends express.Request {
     body: {
       // API TOKEN(WIP)

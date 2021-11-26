@@ -1,4 +1,4 @@
-declare module 'homeMaidApi' {
+declare module 'homeMaidServices' {
   export interface device {
     deviceId: string;
     deviceName: string;

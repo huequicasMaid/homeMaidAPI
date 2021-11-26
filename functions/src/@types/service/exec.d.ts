@@ -1,4 +1,4 @@
-declare module 'homeMaidApi' {
+declare module 'homeMaidServices' {
   export interface execResponse {
     message: string;
 
