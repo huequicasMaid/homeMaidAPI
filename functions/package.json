@@ -1,11 +1,13 @@
 {
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "serve": "npm run build && firebase emulators:start",
+    "serve": "npm run build && npm run config:dump && firebase emulators:start",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
+    "config:get": "firebase functions:config:get",
+    "config:dump": "ts-node --files dumpConfig.ts",
     "check": "tsc --noEmit",
     "build": "esbuild --bundle --outdir=lib --minify --sourcemap --format=cjs --platform=node src/index.ts "
   },

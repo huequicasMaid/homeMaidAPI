@@ -1,21 +1,22 @@
 import axios from 'axios';
-import { devicesResponse } from 'homeMaidApi';
+import { sceneResponse } from 'homeMaidApi';
 import { SwitchBotAPI } from '@/config';
 
-const devices = async (): Promise<devicesResponse | void> => {
+const scenes = async (): Promise<sceneResponse | void> => {
   const token = SwitchBotAPI.API_TOKEN();
   if (!token) return;
 
-  const res = await axios.get<devicesResponse>(
-    `${SwitchBotAPI.BASE_URL}/devices`,
+  const res = await axios.get<sceneResponse>(
+    `${SwitchBotAPI.BASE_URL}/scenes`,
     {
       headers: {
         Authorization: token,
       },
     }
   );
+
   if (!res.data.body) return;
   return res.data;
 };
 
-export default devices;
+export default scenes;

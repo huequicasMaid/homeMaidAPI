@@ -49,6 +49,11 @@ rules:
   # ブロック演算子はスペース入れてね
   block-spacing: error
 
+    # `{}` の中の前後はスペースを入れてね
+  object-curly-spacing: 
+    - error
+    - always
+
   # 演算子の前後のスペースは絶対抜かないで
   space-infix-ops: error
 
@@ -62,3 +67,5 @@ rules:
   import/no-unresolved: off
 
   new-cap: off
+
+  operator-linebreak: off
