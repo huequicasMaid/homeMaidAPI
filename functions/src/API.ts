@@ -1,6 +1,9 @@
 import express from 'express';
+import { execRequest } from 'homeMaidApi';
 import devices from '@/service/devices';
 import scenes from '@/service/scenes';
+import exec from '@/service/exec';
+
 const app: express.Express = express();
 
 app.get('/devices', async (req: express.Request, res: express.Response) => {
@@ -33,5 +36,38 @@ app.get('/scenes', async (req: express.Request, res: express.Response) => {
 app.get('/hello', (req: express.Request, res: express.Response) => {
   res.send({ statusCode: 200, message: 'hello' });
 });
+
+app.post(
+  '/exec',
+  async (req: express.Request<execRequest>, res: express.Response) => {
+    // API TOKEN(WIP)
+    // if (!req.params.token) {
+    //   res.send({
+    //     statusCode: 401,
+    //     message: 'unAuthorized: Missing Token',
+    //   });
+    //   return;
+    // }
+
+    const sceneApiRequest = await exec(
+      Boolean(req.params.isTurnOn),
+      Boolean(req.params.withRoom)
+    );
+
+    if (!sceneApiRequest) {
+      res.send({
+        statusCode: 500,
+        message: 'API REQUEST ERROR',
+      });
+      return;
+    }
+
+    res.send({
+      statusCode: 200,
+      message: sceneApiRequest.message,
+      body: sceneApiRequest.body,
+    });
+  }
+);
 
 export default app;
