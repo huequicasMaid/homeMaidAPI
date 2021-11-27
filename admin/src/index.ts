@@ -8,8 +8,6 @@ const main = async () => {
     credential: admin.credential.cert(serviceAccount),
   });
 
-  const tokenId = firebase.firestore().collection('users').doc().id;
-
   let isTokenExist = true;
   let token = cryptoRandomString({ length: 68, type: 'url-safe' });
 
@@ -30,6 +28,8 @@ const main = async () => {
     }
   }
   console.log('Issued Token: ', token);
+
+  const tokenId = firebase.firestore().collection('users').doc().id;
 
   const tokenDocumentData: token = { token };
   const usersDocumentData: user = {
