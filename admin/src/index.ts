@@ -2,6 +2,7 @@ import * as admin from 'firebase-admin';
 import cryptoRandomString from 'crypto-random-string';
 import { serviceAccount } from './.serviceAccount';
 import { token, user } from 'homeMaidAdminFirestore';
+import input from './input';
 
 const main = async () => {
   const firebase = admin.initializeApp({
@@ -31,9 +32,12 @@ const main = async () => {
 
   const tokenId = firebase.firestore().collection('users').doc().id;
 
+  // decide create user's name
+  const userName = await input();
+
   const tokenDocumentData: token = { token };
   const usersDocumentData: user = {
-    userName: 'huequica',
+    userName,
     tokenId,
   };
   const writeResponses = await Promise.all([
