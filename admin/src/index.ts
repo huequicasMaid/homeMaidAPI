@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import cryptoRandomString from 'crypto-random-string';
 import { serviceAccount } from './.serviceAccount';
+import { token, user } from 'homeMaidAdminFirestore';
 
 const main = async () => {
   const firebase = admin.initializeApp({
@@ -30,8 +31,8 @@ const main = async () => {
   }
   console.log('Issued Token: ', token);
 
-  const tokenDocumentData = { token };
-  const usersDocumentData = {
+  const tokenDocumentData: token = { token };
+  const usersDocumentData: user = {
     userName: 'huequica',
     tokenId,
   };
