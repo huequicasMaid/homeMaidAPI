@@ -30,14 +30,21 @@ const main = async () => {
   }
   console.log('Issued Token: ', token);
 
-  const documentData = { token };
-  const writeDocumentResponse = await firebase
-    .firestore()
-    .collection('tokens')
-    .doc(tokenId)
-    .set(documentData);
+  const tokenDocumentData = { token };
+  const usersDocumentData = {
+    userName: 'huequica',
+    tokenId,
+  };
+  const writeResponses = await Promise.all([
+    firebase
+      .firestore()
+      .collection('tokens')
+      .doc(tokenId)
+      .set(tokenDocumentData),
+    firebase.firestore().collection('users').doc().set(usersDocumentData),
+  ]);
 
-  console.log(writeDocumentResponse);
+  console.log(writeResponses);
 };
 
 main();
