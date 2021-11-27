@@ -1,8 +1,10 @@
 import express from 'express';
-import { execRequest } from 'homeMaidApi';
+import { check, validationResult } from 'express-validator';
+import { execRequest, helloRequest } from 'homeMaidApi';
 import devices from '@/service/devices';
 import scenes from '@/service/scenes';
 import exec from '@/service/exec';
+import { isTokenExist } from '@/validations/hello';
 
 const app: express.Express = express();
 app.use(express.json({}));
@@ -34,9 +36,17 @@ app.get('/scenes', async (req: express.Request, res: express.Response) => {
   });
 });
 
-app.get('/hello', (req: express.Request, res: express.Response) => {
-  res.send({ statusCode: 200, message: 'hello' });
-});
+app.get(
+  '/hello',
+  [check('token').notEmpty().custom(isTokenExist)],
+  (req: express.Request<helloRequest>, res: express.Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(401).send({ statusCode: 401, message: errors.array() });
+    }
+    return res.send({ statusCode: 200, message: 'hello' });
+  }
+);
 
 app.post('/exec', async (req: execRequest, res: express.Response) => {
   // API TOKEN(WIP)
