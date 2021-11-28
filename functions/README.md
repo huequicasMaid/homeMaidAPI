@@ -9,7 +9,7 @@
 
 This api implementation is [switchBotApi](https://github.com/OpenWonderLabs/SwitchBotAPI) wrapper with original authentication that use token.  
 
-API document is [here](https://github.com/huequicasMaid/homeMaidAPI/tree/main/functions/README.md).
+API document is [here](https://github.com/huequicasMaid/homeMaidAPI/tree/main/functions/src/README.md).
 
 # get started
 
