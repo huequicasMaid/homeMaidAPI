@@ -9,7 +9,7 @@
     "config:get": "firebase functions:config:get",
     "config:dump": "ts-node --files dumpConfig.ts",
     "check": "tsc --noEmit",
-    "build": "esbuild --bundle --outdir=lib --minify --sourcemap --format=cjs --platform=node src/index.ts "
+    "build": "esbuild --bundle --outdir=lib --minify --format=cjs --platform=node src/index.ts "
   },
   "engines": {
     "node": "16"
