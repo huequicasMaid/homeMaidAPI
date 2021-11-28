@@ -1,5 +1,8 @@
 declare module 'homeMaidApi' {
-  export interface helloRequest {
-    token?: string;
+  import express from 'express';
+  export interface helloRequest extends express.Request {
+    query: {
+      token?: string;
+    };
   }
 }
