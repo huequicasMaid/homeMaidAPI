@@ -25,7 +25,7 @@ if token and user exist, return this.
 
 ## `[POST] /exec`
 
-execute scene Request to switchBotAPI. 
+execute scene request to switchBotAPI. 
 
 ### Request Parameter
 
@@ -34,8 +34,8 @@ execute scene Request to switchBotAPI.
 |QueryName|Require?|Description|
 |---|---|---|
 |token|true|Generated token|
-|isTurnOn|false|To turnOn Entrance light, set `true`.|
-|withRoom|false|To Enable huequica's Air Conditioner and etc, set `true`.|
+|isTurnOn|false|To turnOn entrance light, set `true`.|
+|withRoom|false|To enable huequica's air conditioner and etc, set `true`.|
 
 
 ### Response
