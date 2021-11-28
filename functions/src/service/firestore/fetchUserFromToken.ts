@@ -1,7 +1,5 @@
-import * as admin from 'firebase-admin';
 import { user } from 'homeMaidFirestore';
-
-const firebase = admin.initializeApp();
+import { firebase } from '@/config/firebase';
 
 export const fetchUserFromToken = async (
   token: string

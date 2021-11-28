@@ -1,6 +1,5 @@
-import * as admin from 'firebase-admin';
 import { history } from 'homeMaidFirestore';
-const firebase = admin.initializeApp();
+import { firebase } from '@/config/firebase';
 
 export const writeHistory = async (writeHistory: history): Promise<void> => {
   const writeDocument = writeHistory;
