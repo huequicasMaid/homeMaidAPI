@@ -2,40 +2,11 @@ import express from 'express';
 import { body, check, validationResult } from 'express-validator';
 import { execRequest, helloRequest } from 'homeMaidApi';
 import { fetchUserFromToken } from '@/service/firestore/fetchUserFromToken';
-import devices from '@/service/devices';
-import scenes from '@/service/scenes';
 import exec from '@/service/exec';
 import { writeHistory } from './service/firestore/writeHistories';
 
 const app: express.Express = express();
 app.use(express.json({}));
-
-app.get('/devices', async (req: express.Request, res: express.Response) => {
-  const devicesResponse = await devices();
-  if (!devicesResponse) {
-    res.send({ statusCode: 500, message: 'API REQUEST ERROR' });
-    return;
-  }
-
-  res.send({
-    statusCode: devicesResponse.statusCode,
-    body: devicesResponse.body,
-  });
-});
-
-app.get('/scenes', async (req: express.Request, res: express.Response) => {
-  const sceneResponse = await scenes();
-
-  if (!sceneResponse) {
-    res.send({ statusCode: 500, message: 'API REQUEST ERROR' });
-    return;
-  }
-
-  res.send({
-    statusCode: sceneResponse.statusCode,
-    body: sceneResponse.body,
-  });
-});
 
 app.get(
   '/hello',
