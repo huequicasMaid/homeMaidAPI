@@ -1,10 +1,11 @@
 import express from 'express';
-import { check, validationResult } from 'express-validator';
+import { body, check, validationResult } from 'express-validator';
 import { execRequest, helloRequest } from 'homeMaidApi';
 import { fetchUserFromToken } from '@/service/firestore/fetchUserFromToken';
 import devices from '@/service/devices';
 import scenes from '@/service/scenes';
 import exec from '@/service/exec';
+import { writeHistory } from './service/firestore/writeHistories';
 
 const app: express.Express = express();
 app.use(express.json({}));
@@ -47,15 +48,15 @@ app.get(
 
     if (!req.query.token) {
       return res
-        .status(500)
+        .status(401)
         .send({ statusCode: 500, message: 'missing token' });
     }
 
     const userResponse = await fetchUserFromToken(req.query.token);
     if (!userResponse) {
       return res
-        .status(500)
-        .send({ statusCode: 500, message: 'User not found.' });
+        .status(401)
+        .send({ statusCode: 401, message: 'User not found.' });
     }
 
     return res.send({
@@ -65,33 +66,55 @@ app.get(
   }
 );
 
-app.post('/exec', async (req: execRequest, res: express.Response) => {
-  // API TOKEN(WIP)
-  // if (!req.params.token) {
-  //   res.send({
-  //     statusCode: 401,
-  //     message: 'unAuthorized: Missing Token',
-  //   });
-  //   return;
-  // }
-  const sceneApiRequest = await exec(
-    Boolean(req.body.isTurnOn),
-    Boolean(req.body.withRoom)
-  );
+app.post(
+  '/exec',
+  [body('token').notEmpty()],
+  async (req: execRequest, res: express.Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(401).send({ statusCode: errors.array() });
+    }
 
-  if (!sceneApiRequest) {
-    res.send({
-      statusCode: 500,
-      message: 'API REQUEST ERROR',
+    if (!req.body.token) {
+      return res
+        .status(401)
+        .send({ statusCode: 401, message: 'missing token' });
+    }
+
+    const userResponse = await fetchUserFromToken(req.body.token);
+    if (!userResponse) {
+      return res
+        .status(401)
+        .send({ statusCode: 401, message: 'User not found' });
+    }
+
+    // request execute scene to switchBotAPI
+    const sceneApiRequest = await exec(
+      Boolean(req.body.isTurnOn),
+      Boolean(req.body.withRoom)
+    );
+
+    if (!sceneApiRequest) {
+      return res.send({
+        statusCode: 500,
+        message: 'API REQUEST ERROR',
+      });
+    }
+
+    // no wait to complete histories transaction
+    writeHistory({
+      category: 'apiExecute',
+      endpoint: sceneApiRequest.execPath,
+      user: userResponse,
+      result: sceneApiRequest.data,
     });
-    return;
-  }
 
-  res.send({
-    statusCode: 200,
-    message: sceneApiRequest.message,
-    body: sceneApiRequest.body,
-  });
-});
+    return res.send({
+      statusCode: 200,
+      message: sceneApiRequest.data.message,
+      body: sceneApiRequest.data.body,
+    });
+  }
+);
 
 export default app;

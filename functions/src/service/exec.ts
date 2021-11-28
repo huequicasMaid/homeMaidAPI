@@ -5,7 +5,7 @@ import { SwitchBotAPI } from '@/config';
 const exec = async (
   isTurnOn: boolean,
   withRoom: boolean
-): Promise<execResponse | void> => {
+): Promise<{ data: execResponse; execPath: string } | void> => {
   const sceneId = isTurnOn
     ? SwitchBotAPI.Scenes.comeBack(withRoom)
     : SwitchBotAPI.Scenes.goingOut(withRoom);
@@ -25,7 +25,10 @@ const exec = async (
 
   // view StatusCode of HTTP Headers
   if (res.status !== 200) return;
-  return res.data;
+  return {
+    data: res.data,
+    execPath: `${SwitchBotAPI.BASE_URL}/scenes/${sceneId}/execute`,
+  };
 };
 
 export default exec;
