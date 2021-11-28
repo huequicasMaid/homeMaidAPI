@@ -3,7 +3,7 @@ import { body, check, validationResult } from 'express-validator';
 import { execRequest, helloRequest } from 'homeMaidApi';
 import { fetchUserFromToken } from '@/service/firestore/fetchUserFromToken';
 import exec from '@/service/exec';
-import { writeHistory } from './service/firestore/writeHistories';
+import { writeHistory } from '@/service/firestore/writeHistories';
 
 const app: express.Express = express();
 app.use(express.json({}));
