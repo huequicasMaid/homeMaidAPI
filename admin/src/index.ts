@@ -36,7 +36,7 @@ const main = async () => {
   const userName = await input();
 
   const tokenDocumentData: token = { token };
-  const usersDocumentData: user = {
+  const userDocumentData: user = {
     userName,
     tokenId,
   };
@@ -46,7 +46,7 @@ const main = async () => {
       .collection('tokens')
       .doc(tokenId)
       .set(tokenDocumentData),
-    firebase.firestore().collection('users').doc().set(usersDocumentData),
+    firebase.firestore().collection('users').doc().set(userDocumentData),
   ]);
 
   console.log(writeResponses);
