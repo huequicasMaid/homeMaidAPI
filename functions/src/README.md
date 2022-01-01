@@ -1,15 +1,20 @@
 # API Documents
 
+# ALL ENDPOINTS
+
+For use this API, contain token in `header`.
+
+|Parameter|Type|Location|Required|Description|
+|---|---|---|---|---|
+|authorization|string|header| `true` | API Token(see [`/admin/README.md`](https://github.com/huequicasMaid/homeMaidAPI/blob/main/admin/README.md).)|
+
 ## `[GET] /hello`
 
 Should use API working, authentication test.
 
 ### Request Query
 
-|QueryName|Require?|Description|
-|---|---|---|
-|token|true| Generated token|
-
+nobody queries required this.
 
 ### Response
 
@@ -33,7 +38,6 @@ execute scene request to switchBotAPI.
 
 |QueryName|Require?|Description|
 |---|---|---|
-|token|true|Generated token|
 |isTurnOn|false|To turnOn entrance light, set `true`.|
 |withRoom|false|To enable huequica's air conditioner and etc, set `true`.|
 
