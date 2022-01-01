@@ -35,10 +35,11 @@ const main = async () => {
   // decide create user's name
   const userName = await input();
 
-  const tokenDocumentData: token = { token };
+  const tokenDocumentData: token = { token, createdAt: new Date() };
   const userDocumentData: user = {
     userName,
     tokenId,
+    createdAt: new Date(),
   };
   const writeResponses = await Promise.all([
     firebase
