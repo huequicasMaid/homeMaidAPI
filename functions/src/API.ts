@@ -39,7 +39,7 @@ app.get(
 
 app.post(
   '/exec',
-  header('token').notEmpty(),
+  header('authorization').notEmpty(),
   async (req: execRequest, res: express.Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
