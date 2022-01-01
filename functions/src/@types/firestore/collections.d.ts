@@ -15,5 +15,6 @@ declare module 'homeMaidFirestore' {
     user: userDocument;
     endpoint: string;
     result: execResponse;
+    createdAt: Date;
   }
 }
