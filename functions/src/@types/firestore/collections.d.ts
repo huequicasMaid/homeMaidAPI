@@ -4,10 +4,12 @@ declare module 'homeMaidFirestore' {
   export interface user {
     userName: string;
     tokenId: string;
+    createdAt: Date;
   }
 
   export interface token {
     token: string;
+    createdAt: Date;
   }
 
   export interface history {
