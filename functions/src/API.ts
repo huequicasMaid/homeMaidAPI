@@ -1,5 +1,5 @@
 import express from 'express';
-import { body, header, validationResult } from 'express-validator';
+import { header, validationResult } from 'express-validator';
 import { execRequest, helloRequest } from 'homeMaidApi';
 import { fetchUserFromToken } from '@/service/firestore/fetchUserFromToken';
 import exec from '@/service/exec';
@@ -39,20 +39,20 @@ app.get(
 
 app.post(
   '/exec',
-  [body('token').notEmpty()],
+  header('token').notEmpty(),
   async (req: execRequest, res: express.Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(401).send({ statusCode: errors.array() });
     }
 
-    if (!req.body.token) {
+    if (!req.headers.authorization) {
       return res
         .status(401)
         .send({ statusCode: 401, message: 'missing token' });
     }
 
-    const userResponse = await fetchUserFromToken(req.body.token);
+    const userResponse = await fetchUserFromToken(req.headers.authorization);
     if (!userResponse) {
       return res
         .status(401)
