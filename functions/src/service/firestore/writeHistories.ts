@@ -1,7 +1,7 @@
-import { history } from 'homeMaidFirestore';
+import { writeHistory as request } from 'homeMaidServices';
 import { firebase } from '@/config/firebase';
 
-export const writeHistory = async (writeHistory: history): Promise<void> => {
+export const writeHistory = async (writeHistory: request): Promise<void> => {
   const writeDocument = writeHistory;
 
   firebase
