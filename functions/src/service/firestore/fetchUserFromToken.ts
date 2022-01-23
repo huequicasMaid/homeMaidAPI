@@ -2,6 +2,12 @@ import { user } from 'homeMaidFirestore';
 import { firebase } from '@/config/firebase';
 import { UserNotFoundException } from '@/exception';
 
+/**
+ * search request user from token
+ * @param {string} token
+ * @return {Object} User Object
+ * @throws {UserNotFoundException} Not exist user or token
+ */
 export const fetchUserFromToken = async (token: string): Promise<user> => {
   const tokenSearchResult = await firebase
     .firestore()

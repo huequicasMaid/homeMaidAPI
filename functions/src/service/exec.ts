@@ -6,6 +6,14 @@ import {
   SceneIdNotFoundException,
 } from '@/exception';
 
+/**
+ * Call scene execute to SwitchBot API Service
+ * @param {boolean} isTurnOn if enabled, switch selling light to ON
+ * @param {boolean} withRoom if enabled, switch with air conditioner
+ * @return {Object} API call result
+ * @throws {SceneIdNotFoundException} SceneId not found in Firebase config
+ * @throws {ExecutionFailedException} Failed API request on SwitchBot
+ */
 const exec = async (
   isTurnOn: boolean,
   withRoom: boolean
