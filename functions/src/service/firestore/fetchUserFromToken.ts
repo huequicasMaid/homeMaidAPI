@@ -1,16 +1,21 @@
 import { user } from 'homeMaidFirestore';
 import { firebase } from '@/config/firebase';
+import { UserNotFoundException } from '@/exception';
 
-export const fetchUserFromToken = async (
-  token: string
-): Promise<user | void> => {
+/**
+ * search request user from token
+ * @param {string} token
+ * @return {Object} User Object
+ * @throws {UserNotFoundException} Not exist user or token
+ */
+export const fetchUserFromToken = async (token: string): Promise<user> => {
   const tokenSearchResult = await firebase
     .firestore()
     .collection('tokens')
     .where('token', '==', token)
     .get();
 
-  if (tokenSearchResult.empty) return;
+  if (tokenSearchResult.empty) throw new UserNotFoundException();
 
   const tokenId = tokenSearchResult.docs[0].id;
 
@@ -20,6 +25,6 @@ export const fetchUserFromToken = async (
     .where('tokenId', '==', tokenId)
     .get();
 
-  if (userSearchResult.empty) return;
+  if (userSearchResult.empty) throw new UserNotFoundException();
   return userSearchResult.docs[0].data() as user;
 };
