@@ -1,7 +1,8 @@
 import express from 'express';
 import {
   ExecutionFailedException,
-  SceneIdNotFoundException,
+  SwitchBotAPISceneIdNotFound,
+  SwitchBotAPITokenNotFoundException,
   UserNotFoundException,
 } from '@/exception';
 
@@ -19,10 +20,16 @@ export const errorResponseHandle = (
     return res.status(401).send({ statusCode: 401, message: 'User not found' });
   }
 
-  if (error instanceof SceneIdNotFoundException) {
+  if (error instanceof SwitchBotAPISceneIdNotFound) {
     return res
       .status(500)
       .send({ statusCode: 500, message: 'SceneId not found.' });
+  }
+
+  if (error instanceof SwitchBotAPITokenNotFoundException) {
+    return res
+      .status(500)
+      .send({ statusCode: 500, message: 'SwitchBot API Token not found.' });
   }
 
   if (error instanceof ExecutionFailedException) {

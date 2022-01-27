@@ -1,7 +1,7 @@
 /**
- * throw if using sceneId not found.
+ * throw if SwitchBot API token was not found in firebase config.
  */
-export class SceneIdNotFoundException extends Error {
+export class SwitchBotAPITokenNotFoundException extends Error {
   /**
    * Error description( basically, don't have to pass any argument )
    */

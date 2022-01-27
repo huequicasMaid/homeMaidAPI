@@ -69,3 +69,9 @@ rules:
   new-cap: off
 
   operator-linebreak: off
+  
+  max-len: 
+    - error
+    - code: 80
+      ignoreUrls: true
+      ignorePattern: ^import\s.+\sfrom\s.+;$
