@@ -4,6 +4,7 @@ import { SwitchBotAPI } from '@/config';
 import {
   ExecutionFailedException,
   SwitchBotAPISceneIdNotFound,
+  SwitchBotAPITokenNotFoundException,
 } from '@/exception';
 
 /**
@@ -12,6 +13,7 @@ import {
  * @param {boolean} withRoom if enabled, switch with air conditioner
  * @return {Object} API call result
  * @throws {SwitchBotAPISceneIdNotFound} SceneId not found in Firebase config
+ * @throws {SwitchBotAPITokenNotFoundException} SwitchBot API token not found
  * @throws {ExecutionFailedException} Failed API request on SwitchBot
  */
 const exec = async (
@@ -23,7 +25,8 @@ const exec = async (
     : SwitchBotAPI.Scenes.goingOut(withRoom);
 
   const token = SwitchBotAPI.API_TOKEN();
-  if (!sceneId || !token) throw new SwitchBotAPISceneIdNotFound();
+  if (!sceneId) throw new SwitchBotAPISceneIdNotFound();
+  if (!token) throw new SwitchBotAPITokenNotFoundException();
 
   const res = await axios.post<execResponse>(
     `${SwitchBotAPI.BASE_URL}/scenes/${sceneId}/execute`,
