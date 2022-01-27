@@ -1,7 +1,7 @@
 /**
  * throw if using sceneId not found.
  */
-export class SceneIdNotFoundException extends Error {
+export class SwitchBotAPISceneIdNotFound extends Error {
   /**
    * Error description( basically, don't have to pass any argument )
    */

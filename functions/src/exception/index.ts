@@ -1,9 +1,9 @@
 import { UserNotFoundException } from '@/exception/UserNotFound';
-import { SceneIdNotFoundException } from '@/exception/SceneIdNotFound';
+import { SwitchBotAPISceneIdNotFound } from '@/exception/SwitchBotAPISceneIdNotFound';
 import { ExecutionFailedException } from '@/exception/ExecutionFailed';
 
 export {
   UserNotFoundException,
-  SceneIdNotFoundException,
+  SwitchBotAPISceneIdNotFound,
   ExecutionFailedException,
 };

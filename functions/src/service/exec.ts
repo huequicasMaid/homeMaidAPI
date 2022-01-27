@@ -3,7 +3,7 @@ import { execResponse } from 'homeMaidServices';
 import { SwitchBotAPI } from '@/config';
 import {
   ExecutionFailedException,
-  SceneIdNotFoundException,
+  SwitchBotAPISceneIdNotFound,
 } from '@/exception';
 
 /**
@@ -11,7 +11,7 @@ import {
  * @param {boolean} isTurnOn if enabled, switch selling light to ON
  * @param {boolean} withRoom if enabled, switch with air conditioner
  * @return {Object} API call result
- * @throws {SceneIdNotFoundException} SceneId not found in Firebase config
+ * @throws {SwitchBotAPISceneIdNotFound} SceneId not found in Firebase config
  * @throws {ExecutionFailedException} Failed API request on SwitchBot
  */
 const exec = async (
@@ -23,7 +23,7 @@ const exec = async (
     : SwitchBotAPI.Scenes.goingOut(withRoom);
 
   const token = SwitchBotAPI.API_TOKEN();
-  if (!sceneId || !token) throw new SceneIdNotFoundException();
+  if (!sceneId || !token) throw new SwitchBotAPISceneIdNotFound();
 
   const res = await axios.post<execResponse>(
     `${SwitchBotAPI.BASE_URL}/scenes/${sceneId}/execute`,
