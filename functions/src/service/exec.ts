@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { execResponse } from 'homeMaidServices';
 import { SwitchBotAPI } from '@/config';
 import {
@@ -6,6 +5,7 @@ import {
   SwitchBotAPISceneIdNotFound,
   SwitchBotAPITokenNotFoundException,
 } from '@/exception';
+import { SwitchBotRepository } from '@/repository/switchBot';
 
 /**
  * Call scene execute to SwitchBot API Service
@@ -28,15 +28,9 @@ const exec = async (
   if (!sceneId) throw new SwitchBotAPISceneIdNotFound();
   if (!token) throw new SwitchBotAPITokenNotFoundException();
 
-  const res = await axios.post<execResponse>(
-    `${SwitchBotAPI.BASE_URL}/scenes/${sceneId}/execute`,
-    {},
-    {
-      headers: {
-        Authorization: token,
-      },
-    }
-  );
+  const switchBotRepos = new SwitchBotRepository(token);
+
+  const res = await switchBotRepos.execScene(sceneId);
 
   // view StatusCode of HTTP Headers
   if (res.status !== 200) throw new ExecutionFailedException();
